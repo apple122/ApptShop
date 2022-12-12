@@ -1,0 +1,16 @@
+.overHide{
+    overflow: hidden;
+    opacity: -1;
+    transition: all 0.5s;
+    align-self: start;
+  }
+.overShow{
+    overflow: hidden;
+    opacity: 1;
+    transition: all 2s;
+}
+
+.dote{
+  padding: 6%;
+  border-radius: 100%;
+}

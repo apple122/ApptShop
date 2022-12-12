@@ -1,0 +1,6 @@
+.position-fixedS{
+    position: fixed;
+    padding-left: 2%;
+    width: 100%;
+    z-index: 10;
+}
