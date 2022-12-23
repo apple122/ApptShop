@@ -13,13 +13,22 @@ export default function Headder (){
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <Link to="/" class="nav-link active" aria-current="page">ໜ້າຫຼັກ</Link>
+                            <Link to="/" class="nav-link active" aria-current="page"><i class="bi bi-pie-chart-fill"></i> ໜ້າຫຼັກ</Link>
                         </li>
                         <li class="nav-item">
                             <Link to="./TypePro" class="nav-link">ປະເພດສີນຄ້າ</Link>
                         </li>
                         <li class="nav-item">
                             <Link to="./importedTYPE" class="nav-link">ນຳເຂົ້າສິນຄ້າ</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link to="./SellTYPE" class="nav-link"><i class="bi bi-shop"></i> ຂາຍສີນຄ້າ</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link to="./HistorySell" class="nav-link"><i class="bi bi-clock-history"></i> ປະຫວັດການຂາຍ</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link to="./HistoryTYPE" class="nav-link"><i class="bi bi-clock-history"></i> ເກັບປະຫວັດສີນຄ້າໝົດ</Link>
                         </li>
                     </ul>
                 </div>

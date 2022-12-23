@@ -17,7 +17,6 @@ export default function TypePro (props) {
     const [ reducer, setRedeuce ] = useReducer(x => x + 1, 0)
   
     const Save = () => {
-        setRedeuce()
         if(type == ''){}else{
             axios.post(DB.URL + DB.PostTypePro, {
                 v1type: type,
@@ -32,6 +31,7 @@ export default function TypePro (props) {
                     timer: 1500,
                     width: 400,
                   })
+                  setRedeuce()
             }).catch((err) => {alert(err)})
         }
     }
@@ -72,6 +72,32 @@ export default function TypePro (props) {
         setGETAPI(res.data.reverse())
       })
     }, [reducer])
+
+    {GetAPI.map((loop) => (
+        axios.get(DB.URL + DB.getTypeUID + loop._id).then((res) => {
+            if(res.data.length > 0){
+                axios.put(DB.URL + DB.PutTypePro + loop._id, {
+                    v1type: loop.v1type,
+                    remark: loop.remark,
+                    curdate: Moment().format('YYYY/MM/DD'),
+                    status: "true",
+                }).then((res) => {
+                    console.log("Update Type Status: True")
+                })
+            }else if(res.data.length == 0){
+                axios.put(DB.URL + DB.PutTypePro + loop._id, {
+                    v1type: loop.v1type,
+                    remark: loop.remark,
+                    curdate: Moment().format('YYYY/MM/DD'),
+                    status: "false",
+                }).then((res) => {
+                    console.log("Update Type Status: False")
+                })
+            }
+        })
+    ))}
+
+    
 
     // action ການຈັດການ - Update
     const [ ShowUPdate, setUPdate ] = useState('')
@@ -153,7 +179,7 @@ export default function TypePro (props) {
                         </div>                                  
                     </div>
                     </form>
-                    <div className='card overflow-hidden'>
+                    <div className='card w-100 overflow-auto'>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -180,7 +206,7 @@ export default function TypePro (props) {
                                                 <button className="btn btn-sm btn-warning" onClick={cancel}>ຍົກເລີກ</button>&nbsp;
                                             </td>
                                             <td className="text-center">
-                                                {item.curdate == Moment().format('YYYY/MM/DD') ? <label class="dote bg-success"></label> : <label class="dote bg-warning"></label>}
+                                                {item.status == 'true' ? (<label class="dote bg-success"></label>) : (<label class="dote bg-warning"></label>)}
                                             </td>
                                         </tr>
                                     ) : 
@@ -190,10 +216,10 @@ export default function TypePro (props) {
                                         <td>{item.remark}</td>
                                         <td>
                                             <a className="btn-sm btn-primary" onClick={() => onlineUpdate(item._id)}><i class="bi bi-pencil-square"></i></a>&nbsp;
-                                            <a className="btn-sm btn-danger" onClick={() => Delete(item._id)}><i class="bi bi-trash3"></i></a>
+                                            {item.status == 'false' ? <a className="btn-sm btn-danger" onClick={() => Delete(item._id)}><i class="bi bi-trash3"></i></a> : ''}
                                         </td>
                                         <td className="text-center">
-                                            {item.curdate == Moment().format('YYYY/MM/DD') ? <label class="dote bg-success"></label> : <label class="dote bg-warning"></label>}
+                                            {item.status == 'true' ? (<label class="dote bg-success"></label>) : (<label class="dote bg-warning"></label>)}
                                         </td>
                                     </tr>
                             ))}

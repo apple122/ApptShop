@@ -4,3 +4,16 @@
     width: 100%;
     z-index: 10;
 }
+
+.ps-absolute{
+    position: absolute;
+}
+
+.ps-relative{
+    position: relative;
+}
+
+.btn-hover:hover {
+    background-color: rgba(224, 217, 217, 0.089);
+    box-shadow: 0px 8px 26px 5px rgba(0,0,0,0.1);
+}
