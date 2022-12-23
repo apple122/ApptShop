@@ -1,4 +1,5 @@
 import axios from 'axios';
+import plant from '../assets/GIF/Plant.gif'
 import React, { useState, useEffect, useReducer } from 'react';
 import Moment from 'moment';
 import { NumericFormat, NumberFormatBase } from 'react-number-format';
@@ -76,6 +77,10 @@ function ImportedTYPE() {
                 setRedeuce()
                 console.log('POST: Success ', Moment().format('YYYY/MM/DD H:mm:ss'))
                 
+              }).then((res) => {
+                axios.patch(DB.URL + DB.PatchtypePro + UIDSL, {
+                    status: 'true'
+                })
               })
         } catch (error) {
             alert(error)
@@ -602,6 +607,7 @@ function ImportedTYPE() {
                         </tbody>
                     </table>
                 </div>
+                {GetAPIIMP.length > 0 ? '' : <label><img src={plant}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
                 </form>
             </div>
             </div>

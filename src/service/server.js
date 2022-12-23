@@ -8,6 +8,7 @@ export default {
     getTypePro : '/v1/type/get',
     getTypeProUID: '/v1/type/getById/',
     DeTypePro : '/v1/type/delete/',
+    PatchtypePro : '/v1/type/patchStatus/',
 
     // API IMP 
     PostIMP : '/v2/imtype/add',

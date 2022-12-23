@@ -1,4 +1,5 @@
 import axios from 'axios'
+import atom from '../assets/GIF/Atom.gif'
 import React, { useState, useEffect, useReducer } from 'react';
 import Moment from 'moment';
 import { NumericFormat, NumberFormatBase } from 'react-number-format';
@@ -59,6 +60,8 @@ export default function HistoryTYPE() {
                                 ))}
                             </tbody>
                         </table>
+                        {GETAPI.length > 0 ? '' : <label><img src={atom}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
+
                     </div>
                 </div>
             </div>

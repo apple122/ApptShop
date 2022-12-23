@@ -1,4 +1,5 @@
 import axios from 'axios'
+import ghost from '../assets/GIF/Ghost.gif'
 import React, { useReducer } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -113,6 +114,7 @@ function HistorySell() {
                             ))}
                         </tbody>
                     </table>
+                    {GETAPISEL.length > 0 ? '' : <label><img src={ghost}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
                 </div>
             </div>
         </div>

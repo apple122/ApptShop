@@ -1,4 +1,5 @@
 import axios from 'axios'
+import skateboarding from '../assets/GIF/Skateboarding.gif'
 import React, { useReducer } from 'react'
 import { useState, useEffect } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
@@ -175,7 +176,6 @@ function SellTYPE() {
                         </div>
                     ))}
                 </div>
-               
                 <Modal show={show} onHide={handleClose} size="xl" aria-labelledby="contained-modal-title-vcenter">
                     <Modal.Header closeButton>
                         <Modal.Title>ແກ້ໄຂຂໍ້ມູນເມືອງ</Modal.Title>
@@ -231,6 +231,9 @@ function SellTYPE() {
                     </Modal.Footer>
                 </Modal>
             </div>
+
+            {GETSELAPI.length > 0 ? '' : <label><img src={skateboarding} style={{width: 80}}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>}
+
         </div>
     </>
   )

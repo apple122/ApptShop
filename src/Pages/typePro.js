@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import winter from '../assets/GIF/Winter.gif'
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -73,31 +74,6 @@ export default function TypePro (props) {
       })
     }, [reducer])
 
-    {GetAPI.map((loop) => (
-        axios.get(DB.URL + DB.getTypeUID + loop._id).then((res) => {
-            if(res.data.length > 0){
-                axios.put(DB.URL + DB.PutTypePro + loop._id, {
-                    v1type: loop.v1type,
-                    remark: loop.remark,
-                    curdate: Moment().format('YYYY/MM/DD'),
-                    status: "true",
-                }).then((res) => {
-                    console.log("Update Type Status: True")
-                })
-            }else if(res.data.length == 0){
-                axios.put(DB.URL + DB.PutTypePro + loop._id, {
-                    v1type: loop.v1type,
-                    remark: loop.remark,
-                    curdate: Moment().format('YYYY/MM/DD'),
-                    status: "false",
-                }).then((res) => {
-                    console.log("Update Type Status: False")
-                })
-            }
-        })
-    ))}
-
-    
 
     // action ການຈັດການ - Update
     const [ ShowUPdate, setUPdate ] = useState('')
@@ -226,6 +202,7 @@ export default function TypePro (props) {
                             </tbody>
                         </table>
                     </div>
+                    {GetAPI.length > 0 ? '' : <label><img src={winter}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
                 </div>
             </div>
         </div>
