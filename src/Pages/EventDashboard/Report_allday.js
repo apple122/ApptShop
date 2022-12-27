@@ -37,30 +37,30 @@ export default function Report_allday() {
                 </select>
             </div>
         </div>
-        <div className='card-body w-100 overflow-auto'>
+        <div className='card-body w-100 overflow-auto text-white'>
             <div className='row'>
                 <div className='col-md-3'>
-                    <div className='card card-body'>
+                    <div className='card-body box-one text-white'>
                         <label>ລາຍຮັບທັ້ງໝົດ</label>
-                        <h4 className='text-center text-success'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(income)}</h4>
+                        <h4 className='text-center'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(income)}</h4>
                     </div>
                 </div>
                 <div className='col-md-3'>
-                    <div className='card card-body'>
+                    <div className='card-body box-two text-white'>
                         <label>ລາຍຈ່າຍທັ້ງໝົດ</label>
                         <h4 className='text-center text-danger'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(cost)}</h4>
                     </div>
                 </div>
                 <div className='col-md-3'>
-                    <div className='card card-body'>
+                    <div className='card-body box-three text-white'>
                         <label>ກຳໄລທັ້ງໝົດ</label>
-                        <h4 className='text-center text-success'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(income < cost ? '' : (cost - income))}</h4>
+                        <h4 className='text-center'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(income < cost ? '' : (income - cost))}</h4>
                     </div>
                 </div>
                 <div className='col-md-3'>
-                    <div className='card card-body'>
+                    <div className='card-body box-flow text-white'>
                         <label>ຫຼຸດທືນ</label>
-                        <h4 className='text-center text-danger'>- {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(income > cost ? '' : (cost - income))}</h4>
+                        <h4 className='text-center text-danger'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(income > cost ? '' : (income - cost))}</h4>
                     </div>
                 </div>
             </div>

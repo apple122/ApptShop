@@ -60,7 +60,7 @@ export default function HistoryTYPE() {
                                 ))}
                             </tbody>
                         </table>
-                        {GETAPI.length > 0 ? '' : <label><img src={atom}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
+                        {GETAPI.filter((e) => e.status == 'offline').length > 0 ? '' : <label><img src={atom}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
 
                     </div>
                 </div>

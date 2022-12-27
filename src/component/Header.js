@@ -1,10 +1,58 @@
+import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Link, Router, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import '../component/Component.css'
+import DB from '../service/server'
+import Routers from '../Routers/Routers';
+import RouterLogin from "../Routers/RouterLogin";
+import LogoutGIF from '../assets/GIF/kaioura-anime-girl.gif'
 
 export default function Headder (){
+    const navigate = useNavigate()
+
+    const APITOKEN = localStorage.getItem('APITOKEN')
+    const [ APITKOKEN, setTOKEN ] = useState(false)
+    const Logout = () => {
+        Swal.fire({
+            title: 'ອອກຈາລະບົບ!',
+            text: 'ກົດປຸ່ມ ອອກຈາກລະບົບ ເພືອອກຈາກລະບົບ.',
+            imageUrl: LogoutGIF,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+            showCancelButton: true,
+            confirmButtonText: 'ອອກຈາກລະບົບ!',
+            cancelButtonText: 'ຍົກເລີກ!',
+            reverseButtons: true
+          }).then((require) => {
+            if(require.isConfirmed){
+               axios.patch(DB.URL + DB.Logout + localStorage.getItem('OLDAPITOKEN')).then((res) => {
+                    localStorage.removeItem('OLDAPITOKEN')
+                    localStorage.removeItem('APITOKEN')
+                    setTOKEN(false)
+                    navigate('/Login')
+               })
+            }
+          })
+    }
+
+    axios.get(DB.URL + DB.GetByLogin + localStorage.getItem('OLDAPITOKEN')).then((res) => {
+    if(res.data.status == 'true'){
+        setTOKEN(true)
+    }else{
+        localStorage.removeItem('OLDAPITOKEN')
+        localStorage.removeItem('APITOKEN')
+        setTOKEN(false)
+        alert('ໄອດີໝົດອາຍຸແລ້ວ ກະລຸນາລົງຊື່ເຂົ້າໃຊ້ໄໝ່ອີກຄັ້ງ!')
+    }
+    })
+
     return (
         <>
+        <div className={`${APITKOKEN == true ? '' : 'd-none'}`}>
             <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixedS">
                 <Link class="navbar-brand" to="/ໂປຣເຈັກຂາຍເຄື່ອງ"><strong>ໂປຣເຈັກຂາຍເຄື່ອງ</strong></Link>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,28 +60,40 @@ export default function Headder (){
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <Link to="/" class="nav-link active" aria-current="page"><i class="bi bi-pie-chart-fill"></i> ໜ້າຫຼັກ</Link>
+                        <li class="nav-item item_hover">
+                            <Link to="/ໜ້າຫຼັກ" class="nav-link active" aria-current="page"><i class="bi bi-pie-chart-fill"></i> ໜ້າຫຼັກ</Link>
                         </li>
-                        <li class="nav-item">
-                            <Link to="./TypePro" class="nav-link">ປະເພດສີນຄ້າ</Link>
+                        <li class="nav-item item_hover">
+                            <Link to="./ປະເພດສີນຄ້າ" class="nav-link">ປະເພດສີນຄ້າ</Link>
                         </li>
-                        <li class="nav-item">
-                            <Link to="./importedTYPE" class="nav-link">ນຳເຂົ້າສິນຄ້າ</Link>
+                        <li class="nav-item item_hover">
+                            <Link to="./ນຳເຂົ້າສິນຄ້າ" class="nav-link text-danger">ນຳເຂົ້າສິນຄ້າ</Link>
                         </li>
-                        <li class="nav-item">
-                            <Link to="./SellTYPE" class="nav-link"><i class="bi bi-shop"></i> ຂາຍສີນຄ້າ</Link>
+                        <li class="nav-item item_hover">
+                            <Link to="./ຂາຍສີນຄ້າ" class="nav-link"><i class="bi bi-shop"></i> ຂາຍສີນຄ້າ</Link>
                         </li>
-                        <li class="nav-item">
-                            <Link to="./HistorySell" class="nav-link"><i class="bi bi-clock-history"></i> ປະຫວັດການຂາຍ</Link>
+                        <li class="nav-item item_hover">
+                            <Link to="./ປະຫວັດການຂາຍ" class="nav-link"><i class="bi bi-clock-history"></i> ປະຫວັດການຂາຍ</Link>
                         </li>
-                        <li class="nav-item">
-                            <Link to="./HistoryTYPE" class="nav-link"><i class="bi bi-clock-history"></i> ເກັບປະຫວັດສີນຄ້າໝົດ</Link>
+                        <li class="nav-item item_hover">
+                            <Link to="./ເກັບປະຫວັດສີນຄ້າໝົດ" class="nav-link"><i class="bi bi-clock-history"></i> ເກັບປະຫວັດສີນຄ້າໝົດ</Link>
                         </li>
+
                     </ul>
+                    <form class="form-inline my-2 my-lg-0 pr-2">
+                        <button type="button" class="btn btn-outline-danger my-2 my-sm-0" onClick={Logout}><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    </form>
                 </div>
             </nav>
             <div className="p-5"></div>
+            <Routers/>
+        </div>
+
+        <div className={`${APITKOKEN == false ? '' : 'd-none'}`}>
+            {/* <Login/> */}
+            <RouterLogin/>
+        </div>
+            
         </>
     )
 }

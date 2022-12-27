@@ -12,13 +12,16 @@ export default function Routers () {
     return ( 
         <>
             <Routes>
-                <Route exact path='/TypePro' element={< TypePro />}></Route>
-                <Route exact path='/importedTYPE' element={ < ImportedTYPE /> }></Route>
-                <Route exact path='/SellTYPE' element={ < SellTYPE /> }></Route>
-                <Route exact path='/SellTYPE_modal/:id' element={ < SellTYPE_modal /> }></Route>
-                <Route exact path='/HistorySell' element={ < HistorySell /> }></Route>
-                <Route exact path='/HistoryTYPE' element={ < HistoryTYPE /> }></Route>
+                <Route exact path='/ປະເພດສີນຄ້າ' element={< TypePro />}></Route>
+                <Route exact path='/ນຳເຂົ້າສິນຄ້າ' element={ < ImportedTYPE /> }></Route>
+                <Route exact path='/ຂາຍສີນຄ້າ' element={ < SellTYPE /> }></Route>
+                <Route exact path='/ປະຫວັດການຂາຍ' element={ < HistorySell /> }></Route>
+                <Route exact path='/ເກັບປະຫວັດສີນຄ້າໝົດ' element={ < HistoryTYPE /> }></Route>
+                
+                <Route exact path='/Login' element={ < Dashboard /> }></Route>
                 <Route exact path='/' element={ < Dashboard /> }></Route>
+                <Route exact path='/ໜ້າຫຼັກ' element={ < Dashboard /> }></Route>
+                <Route exact path='/ໂປຣເຈັກຂາຍເຄື່ອງ' element={ < Dashboard /> }></Route>
             </Routes>
         </>
     )

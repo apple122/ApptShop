@@ -28,4 +28,9 @@ export default {
     GetBySell : '/v4/selltype/getById/',
     GetByNameSell : '/v4/selltype/getByIdName/',
     DelBySell : '/v4/selltype/delete/',
+
+    // User Login
+    Login: '/Login/Login', 
+    Logout: '/Login/logout/',
+    GetByLogin: '/Login/GetById/',
 }

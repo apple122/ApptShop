@@ -1,11 +1,13 @@
 import axios from 'axios'
 import skateboarding from '../assets/GIF/Skateboarding.gif'
+import Beating_hearts from '../assets/GIF/Beating hearts.gif'
 import React, { useReducer } from 'react'
 import { useState, useEffect } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import DB from '../service/server'
 import Moment from 'moment';
 import Swal from 'sweetalert2';
+import { NumericFormat, NumberFormatBase } from 'react-number-format';
 
 function SellTYPE() {
 
@@ -83,7 +85,7 @@ function SellTYPE() {
             v2ImId: UIDTYE,
             number_bin: random,
             v4qty: qty,
-            v4bprice: bprice,
+            v4bprice: (inputsel == '' ? bprice : inputsel),
             v4amount: (inputsel == '' ? bprice : inputsel) * qty,
             curdate: Moment().format('YYYY/MM/DD')
         }).then((res) => {
@@ -125,12 +127,13 @@ function SellTYPE() {
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={"#" + Loop.v1type} aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                    ປະເພດ: {Loop.v1type}
+                                    ປະເພດ: {Loop.v1type} / {GETSELAPI.filter((e) =>e.v1typeId._id == Loop._id && e.status == 'true').length}
                                 </button>
                             </h2>
                             <div id={Loop.v1type} class="accordion-collapse collapse show">
                                 <div class="accordion-body">
                                     <div className='row'>
+                                        {GETSELAPI.filter((e) =>e.v1typeId._id == Loop._id && e.status == 'true').length == 0  ? <label><img src={Beating_hearts} style={{width: 40}}/><strong>ປິດການຂາຍປະເພດນີ້....</strong></label> : ''}
                                         {GETSELAPI.filter((e) => e.v1typeId._id == Loop._id && e.status == 'true').map((item) => (
                                             item.v2qty - item.HistoryQty > 0 ? 
                                             <div className='col-md-2'>
@@ -193,7 +196,7 @@ function SellTYPE() {
                                 </label>&nbsp;
 
                                 <h5>ຂະໜາດ Size: <strong>{sizev2}</strong></h5>
-                                <h5>ຈຳນວນຈຳກັດ: <strong>{v2qty - HistoryQty} qty</strong></h5>
+                                <h5>ຈຳນວນຈຳກັດ: <strong>{v2qty - HistoryQty} QTY</strong></h5>
 
                                 <nav aria-label="...">
                                     <ul class="pagination">
@@ -216,7 +219,7 @@ function SellTYPE() {
                                         </h4>
                                         : 
                                         <h4 className='row'>
-                                            <label className='col-md-3'>ລາຄາຂາຍ:</label><label className='col-md-5'><input className='form-control text-success' defaultValue={bprice} onChange={(e) => inputSell(e.target.value)}/></label>&nbsp; <label className='col-md-3'><button className='btn btn-sm btn-outline-danger' onClick={FalsePercen}>% ລົດລາຂາ</button></label>
+                                            <label className='col-md-3'>ລາຄາຂາຍ:</label><label className='col-md-5'><NumericFormat className='form-control text-success' defaultValue={bprice} onChange={(e) => inputSell(e.target.value)}/></label>&nbsp; <label className='col-md-3'><button className='btn btn-sm btn-outline-danger' onClick={FalsePercen}>% ລົດລາຂາ</button></label>
                                         </h4>
                                     }
                                     <h4>ເງີນລວມ: <strong className='text-danger'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format((inputsel == '' ? bprice : inputsel) * qty)}</strong></h4>

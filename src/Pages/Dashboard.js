@@ -12,7 +12,7 @@ export default function Dashboard() {
             <div className='container'>
                 {/* Event Dashboard */}
                 <ReportAll /> &nbsp;
-                <Report_allday />
+                <Report_allday /> &nbsp;
                 <Report_Chart />
                 {/* Event Dashboard */}
             </div>
