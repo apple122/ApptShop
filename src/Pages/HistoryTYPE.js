@@ -32,6 +32,7 @@ export default function HistoryTYPE() {
                     </div>
     
                     <div className='card-body w-100 overflow-auto'>
+                    {GETAPI.filter((e) => e.status == 'offline').length > 0 ? 
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -60,8 +61,7 @@ export default function HistoryTYPE() {
                                 ))}
                             </tbody>
                         </table>
-                        {GETAPI.filter((e) => e.status == 'offline').length > 0 ? '' : <label><img src={atom}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
-
+                        : <label><img src={atom}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
                     </div>
                 </div>
             </div>

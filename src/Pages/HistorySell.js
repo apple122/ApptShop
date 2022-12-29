@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Swal from 'sweetalert2'
 import DB from '../service/server'
 import Moment from 'moment';
+import { Modal, Button, Form } from 'react-bootstrap'
 
 
 function HistorySell() {
@@ -60,9 +61,20 @@ function HistorySell() {
         }
     }
 
+    const [ IMGSHOW, swtSHOWIMG ] = useState('')
+    const ShowIMage = (IMG) => {
+        swtSHOWIMG(IMG)
+        setShow(true);
+    }
 
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
   return (
     <>
+        <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter">
+            <img src={DB.IMG + IMGSHOW} style={{width: 100+'%'}}/>
+        </Modal>
         <div className='container'>
             <div className='card'>
                 <div className='card-header d-flex'>
@@ -81,6 +93,7 @@ function HistorySell() {
                 </div>
 
                 <div className='card-body w-100 overflow-auto'>
+                {GETAPISEL.length > 0 ? 
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -100,7 +113,7 @@ function HistorySell() {
                                 <tr>
                                     <td>{x++}</td>
                                     <td>{item.number_bin}</td>
-                                    <td><img src={DB.IMG + item?.v2ImId.v2image} style={{width: 100}}/></td>
+                                    <td><img src={DB.IMG + item?.v2ImId.v2image} onClick={() => ShowIMage(item.v2ImId.v2image)} style={{width: 100, height: 100}}/></td>
                                     <td>{item?.v2ImId.v2typeSl}</td>
                                     <td>{item.v4qty}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4bprice)}</td>
@@ -108,14 +121,16 @@ function HistorySell() {
                                     <td>{item.curdate}</td>
                                     <td>
                                         <button className='btn btn-sm btn-info'><i class="bi bi-printer-fill"></i> ອອກບີນ</button><br/>
-                                        <button type='button' className='btn btn-sm btn-danger mt-1' onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
+                                        {item.curdate == Moment().format("YYYY/MM/DD") ?
+                                            <button type='button' className='btn btn-sm btn-danger mt-1' onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
+                                        :''}
                                     </td>
                                 </tr>
                             )) : GETAPISEL.filter((e) => e.curdate == CurdateSelect).map((item) => (
                                 <tr>
                                     <td>{x++}</td>
                                     <td>{item.number_bin}</td>
-                                    <td><img src={DB.IMG + item?.v2ImId.v2image} style={{width: 100}}/></td>
+                                    <td><img src={DB.IMG + item?.v2ImId.v2image} onClick={() => ShowIMage(item.v2ImId.v2image)} style={{width: 100, height: 100}}/></td>
                                     <td>{item?.v2ImId.v2typeSl}</td>
                                     <td>{item.v4qty}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4bprice)}</td>
@@ -123,13 +138,15 @@ function HistorySell() {
                                     <td>{item.curdate}</td>
                                     <td>
                                         <button className='btn btn-sm btn-info'><i class="bi bi-printer-fill"></i> ອອກບີນ</button><br/>
-                                        <button type='button' className='btn btn-sm btn-danger mt-1' onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
+                                        {item.curdate == Moment().format("YYYY/MM/DD") ?
+                                            <button type='button' className='btn btn-sm btn-danger mt-1' onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
+                                        :''}
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    {GETAPISEL.length > 0 ? '' : <label><img src={ghost}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
+                    : <label><img src={ghost}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
                 </div>
             </div>
         </div>

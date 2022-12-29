@@ -123,7 +123,8 @@ function SellTYPE() {
                 
                 </div>
                 <div class="accordion" id="accordionPanelsStayOpenExample">
-                    {GETSELAPITYPE.filter((e) => e.status == 'true').map((Loop) => (
+                {GETSELAPI.length > 0 ? 
+                    GETSELAPITYPE.filter((e) => e.status == 'true').map((Loop) => (
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={"#" + Loop.v1type} aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -177,7 +178,9 @@ function SellTYPE() {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    ))
+                : <label><img src={skateboarding} style={{width: 80}}/><strong>ສີນຄ້າຍັງບໍ່ມີການວາງຂາຍ....</strong></label>}
+
                 </div>
                 <Modal show={show} onHide={handleClose} size="xl" aria-labelledby="contained-modal-title-vcenter">
                     <Modal.Header closeButton>
@@ -225,7 +228,6 @@ function SellTYPE() {
                                     <h4>ເງີນລວມ: <strong className='text-danger'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format((inputsel == '' ? bprice : inputsel) * qty)}</strong></h4>
                                 </div>
                             </div>
-                            
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
@@ -234,9 +236,6 @@ function SellTYPE() {
                     </Modal.Footer>
                 </Modal>
             </div>
-
-            {GETSELAPI.length > 0 ? '' : <label><img src={skateboarding} style={{width: 80}}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>}
-
         </div>
     </>
   )

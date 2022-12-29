@@ -51,7 +51,7 @@ export default function TypePro (props) {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'ລົບຂໍ້ມູນ!'
           }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete(DB.URL + DB.DeTypePro + Id).then((res) => {
@@ -68,9 +68,14 @@ export default function TypePro (props) {
     
     // GET API
     const [ GetAPI, setGETAPI ] = useState([])
+    const [ GetFalse, setFalse ] = useState([])
+    console.log(GetFalse)
     useEffect(() => {
       axios.get(DB.URL + DB.getTypePro).then((res) => {
         setGETAPI(res.data.reverse())
+        axios.get(DB.URL + DB.getTypeUID + res.data._id).then((res) => {
+            setFalse(res.data.reverse())
+        })
       })
     }, [reducer])
 
@@ -106,6 +111,32 @@ export default function TypePro (props) {
         }
         
     }
+
+    const Offline = (Id) => {
+        Swal.fire({
+            title: 'ທ່ານຕ້ອງການລົບຂໍ້ມູນນີ້ ຫຼື່ ບໍ່?',
+            text: "ຂໍ້ມູນນີ້ມີການເຊື່ອມໂຍງກັບຂໍ້ມູນອືນໆ ກະລຸນາກວດສອບຂໍ້ມູນ!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ລົບຂໍ້ມູນ!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.patch(DB.URL + DB.PatchtypePro + Id, {
+                    status: 'Offline'
+                }).then((res) => {
+                    Swal.fire(
+                        'ລົບຂໍ້ມູນສຳເລັດ!',
+                        'Your file has been deleted.',
+                        'success'
+                        )
+                    setRedeuce()
+                })
+            }
+        })
+    }
+
     const onlineUpdate = (id) => {
         setShowSuc(id)
         setUPdate('')
@@ -155,6 +186,7 @@ export default function TypePro (props) {
                         </div>                                  
                     </div>
                     </form>
+                    {GetAPI.length > 0 ? 
                     <div className='card w-100 overflow-auto'>
                         <table class="table table-striped">
                             <thead>
@@ -167,7 +199,7 @@ export default function TypePro (props) {
                                 </tr>
                             </thead>
                             <tbody>
-                            {GetAPI.map((item) => (
+                            {GetAPI.filter((e) => e.status !== 'Offline').map((item) => (
                                     item._id == ShowSuc ?
                                     (
                                         <tr>
@@ -192,17 +224,21 @@ export default function TypePro (props) {
                                         <td>{item.remark}</td>
                                         <td>
                                             <a className="btn-sm btn-primary" onClick={() => onlineUpdate(item._id)}><i class="bi bi-pencil-square"></i></a>&nbsp;
-                                            {item.status == 'false' ? <a className="btn-sm btn-danger" onClick={() => Delete(item._id)}><i class="bi bi-trash3"></i></a> : ''}
+                                            {GetFalse.filter((e) => e.status == 'offline' && e.v1typeId == item._id).length == GetFalse.filter((e) => e.v1typeId == item._id).length ?
+                                             <a className="btn-sm btn-danger" onClick={() => Offline(item._id)}><i class="bi bi-inboxes-fill"></i></a> : <label className="btn-sm btn-success"><i class="bi bi-chevron-bar-contract"></i> ຂໍ້ມູນມີການນຳໃຊ້</label>
+                                            }
                                         </td>
                                         <td className="text-center">
-                                            {item.status == 'true' ? (<label class="dote bg-success"></label>) : (<label class="dote bg-warning"></label>)}
+                                            {GetFalse.filter((e) => e.status == 'offline' && e.v1typeId == item._id).length == GetFalse.filter((e) => e.v1typeId == item._id).length ?
+                                             <label class="dote bg-warning"></label> : item.status == 'true' ? (<label class="dote bg-success"></label>) : (<label class="dote bg-warning"></label>)
+                                            }
                                         </td>
                                     </tr>
                             ))}
                             </tbody>
                         </table>
                     </div>
-                    {GetAPI.length > 0 ? '' : <label><img src={winter}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
+                    : <label><img src={winter}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
                 </div>
             </div>
         </div>

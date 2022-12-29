@@ -5,6 +5,7 @@ import Moment from 'moment';
 import { NumericFormat, NumberFormatBase } from 'react-number-format';
 import DB from '../service/server'
 import Swal from 'sweetalert2';
+import { Modal, Button, Form } from 'react-bootstrap'
 
 function ImportedTYPE() {
 
@@ -96,7 +97,7 @@ function ImportedTYPE() {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'ລົບຂໍ້ມູນ!'
               }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete(DB.URL + DB.DelIMP + ID).then((res) => {
@@ -307,12 +308,26 @@ function ImportedTYPE() {
    
     const [ SetAPI, setAPI ] = useState('')
 
+    const [ ShowIMG, setIMGAE ] = useState('')
+    const showImgae = (IMGID) => {
+        axios.get(DB.URL + DB.GetIdIMP + IMGID).then((res) => {
+            setIMGAE(res.data)
+            setShowIMG(true);
+        })
+    }
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [showIMG, setShowIMG] = useState(false);
+    const handleCloseIMG = () => setShowIMG(false);
+    const handleShowIMG = () => setShowIMG(true);
   return (
     <>
+    <Modal show={showIMG} onHide={handleCloseIMG} aria-labelledby="contained-modal-title-vcenter">
+        <img src={DB.IMG + ShowIMG.v2image} style={{width: 100+'%'}}/>
+    </Modal>
        <div className='container'>
             <div className='card'>
             <div className='card-header d-flex'>
@@ -416,6 +431,7 @@ function ImportedTYPE() {
                     </form>
                 </div>
                 <form method="put" onSubmit={updateSave} enctype="multipart/form-data">
+                {GetAPIIMP.length > 0 ? 
                 <div className='card w-100 overflow-auto'>
                     <table class="table table-striped">
                         <thead>
@@ -437,7 +453,7 @@ function ImportedTYPE() {
                                 item.status == 'offline' ? '' : item.v2qty - item.HistoryQty == 0 ? 
                                 <tr>
                                     <td>{x++}</td>
-                                    <td><img src={DB.IMG + item.v2image} style={{width: 100}}/></td>
+                                    <td><img src={DB.IMG + item.v2image} onClick={() => showImgae(item._id)} style={{width: 100}}/></td>
                                     <td>{(item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
                                     <td>{item.sizev2}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2sprice)}</td>
@@ -554,7 +570,7 @@ function ImportedTYPE() {
                                 SetAPI == item.v1typeId._id ? 
                                     <tr>
                                         <td>{x++}</td>
-                                        <td><img src={DB.IMG + item.v2image} style={{width: 100}}/></td>
+                                        <td><img src={DB.IMG + item.v2image} onClick={() => showImgae(item._id)} style={{width: 100, height: 100}}/></td>
                                         <td>{(item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
                                         <td>{item.sizev2}</td>
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2sprice)}</td>
@@ -564,7 +580,11 @@ function ImportedTYPE() {
                                         <td>
                                             <div>
                                                 <a className="btn-sm btn-primary" onClick={() => Update(item._id)}><i class="bi bi-pencil-square"></i></a>&nbsp;
-                                                <a className="btn-sm btn-danger" onClick={() => Delete(item._id)}><i class="bi bi-trash3"></i></a>
+                                                {item.statusSell == 'true' ? 
+                                                    <button type='button' className="btn btn-sm btn-danger" onClick={() => OffLineSell(item._id)}><i class="bi bi-inboxes-fill"></i></button>
+                                                    : <a className="btn-sm btn-danger" onClick={() => Delete(item._id)}><i class="bi bi-trash3"></i></a>
+                                                }
+                                                
                                             </div>
                                             <div className='pt-3'>
                                                 {item.status == 'false' ? 
@@ -580,7 +600,7 @@ function ImportedTYPE() {
                                 SetAPI == '' ? 
                                     <tr>
                                         <td>{x++}</td>
-                                        <td><img src={DB.IMG + item.v2image} style={{width: 100}}/></td>
+                                        <td><img src={DB.IMG + item.v2image} onClick={() => showImgae(item._id)} style={{width: 100, height: 100}}/></td>
                                         <td>{(item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
                                         <td>{item.sizev2}</td>
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2sprice)}</td>
@@ -590,7 +610,11 @@ function ImportedTYPE() {
                                         <td>
                                             <div>
                                                 <a className="btn-sm btn-primary" onClick={() => Update(item._id)}><i class="bi bi-pencil-square"></i></a>&nbsp;
-                                                <a className="btn-sm btn-danger" onClick={() => Delete(item._id)}><i class="bi bi-trash3"></i></a>
+                                                {item.statusSell == 'true' ? 
+                                                    <button type='button' className="btn btn-sm btn-danger" onClick={() => OffLineSell(item._id)}><i class="bi bi-inboxes-fill"></i></button>
+                                                    : <a className="btn-sm btn-danger" onClick={() => Delete(item._id)}><i class="bi bi-trash3"></i></a>
+                                                }
+                                                
                                             </div>
                                             <div className='pt-3'>
                                                 {item.status == 'false' ? 
@@ -607,7 +631,7 @@ function ImportedTYPE() {
                         </tbody>
                     </table>
                 </div>
-                {GetAPIIMP.length > 0 ? '' : <label><img src={plant}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
+                : <label><img src={plant}/><strong>ບໍ່ມີຂໍ້ມູນ....</strong></label>} 
                 </form>
             </div>
             </div>
