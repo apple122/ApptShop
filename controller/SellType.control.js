@@ -1,4 +1,5 @@
 const data = require('../model/SellType.model')
+const Importtpe = require('../model/Importtpe.model')
 
 const ImControl = {
     // POST
@@ -6,6 +7,18 @@ const ImControl = {
         try {
             const newSell = new data.SellType(req.body)
             const saveTYpro = await newSell.save()
+
+            // Status Sell 
+            const SellTure = {
+                statusSell: 'true'
+            }
+
+            await Importtpe.Imtype.findByIdAndUpdate(saveTYpro.v2ImId, SellTure ,{
+                new: true,
+                runValidators: true,
+                useFindAndModify: false
+            })
+
             console.log(saveTYpro)
             res.status(200).json(saveTYpro)
         } catch (error) {

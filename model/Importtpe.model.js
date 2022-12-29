@@ -47,6 +47,10 @@ const Schema = new mongoose.Schema({
         type: String,
         default: false
     },
+    statusSell: {
+        type: String,
+        default: false
+    },
 })
 
 let Imtype = mongoose.model("Importtype", Schema)

@@ -76,12 +76,11 @@ const ImControl = {
     //GET ById Name Status
     getByIdNameImType: async ( req, res ) => {
         try {
-            const getByIdType = await data.Imtype.find({"status" : "offline", "id" : req.params.id})
+            const getByIdType = await data.Imtype.find({"id" : req.params.id})
             console.log(getByIdType.length)
-            res.status(200).json({
-                length: getByIdType.length,
+            res.status(200).json(
                 getByIdType
-            })
+            )
         } catch (error) {
             res.status(500).json(error)
         }
