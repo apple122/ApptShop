@@ -21,7 +21,7 @@ function HistorySell() {
     }, [reducer])
 
     const [ CurdateSelect, setCurdateSelect ] = useState('')
-    const LoopQnumberDrw = [...new Set(GETAPISEL.map(item => (Moment(item.curdate).format("YYYY/MM/DD"))))]
+    const LoopQnumberDrw = [...new Set(GETAPISEL.map(item => (Moment(item.curdate).format("DD/MM/YYYY"))))]
 
     const reload = () => {
         setRedeuce()
@@ -123,7 +123,7 @@ function HistorySell() {
                                     <td>{item.v4qty}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4bprice)}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4amount)}</td>
-                                    <td>{item.curdate}</td>
+                                    <td>{Moment(item.curdate).format("DD/MM/YYYY")}</td>
                                     <td>
                                         <Printer_HistorySell id={item._id}/>
                                         {Moment(item.curdate).format("YYYY/MM/DD") == Moment().format("YYYY/MM/DD") ?
@@ -131,7 +131,7 @@ function HistorySell() {
                                         :''}
                                     </td>
                                 </tr>
-                            )) : GETAPISEL.filter((e) => e.curdate == CurdateSelect).map((item) => (
+                            )) : GETAPISEL.filter((e) => (Moment(e.curdate).format("DD/MM/YYYY")) == CurdateSelect).map((item) => (
                                 <tr>
                                     <td>{x++}</td>
                                     <td>{item.number_bin}</td>
@@ -140,7 +140,7 @@ function HistorySell() {
                                     <td>{item.v4qty}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4bprice)}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4amount)}</td>
-                                    <td>{item.curdate}</td>
+                                    <td>{Moment(item.curdate).format("DD/MM/YYYY")}</td>
                                     <td>
                                         <Printer_HistorySell id={item._id}/>
                                         {Moment(item.curdate).format("YYYY/MM/DD") == Moment().format("YYYY/MM/DD") ?

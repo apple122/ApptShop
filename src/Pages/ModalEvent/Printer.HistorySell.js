@@ -86,7 +86,7 @@ export default function Printer_HistorySell(props) {
                                     </div>
                                 </th>
                                 <th className='col-md-6'>
-                                    <div className='p-1 col-md-6'>
+                                    <div className='p-1 col-md-12'>
                                         <strong>ຈຳນວນ: </strong><label>{GETAPISEL.v4qty}</label>
                                     </div>
                                 </th>
@@ -110,7 +110,7 @@ export default function Printer_HistorySell(props) {
                             <tr>
                                 <th className='col-md-8'>
                                     <div className='p-1'>
-                                        <strong>ເວລາຊື້: </strong><label>{GETAPISEL.curdate}</label>
+                                        <strong>ເວລາຊື້: </strong><label>{Moment(GETAPISEL.curdate).format("DD/MM/YYYY")}</label>
                                     </div>
                                 </th>
                                 <th rowspan="4" className='col-md-2 text-end'>                        

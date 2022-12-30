@@ -86,7 +86,7 @@ export default function HistoryTYPE() {
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2sprice)}</td>
                                         <td>{item.v2qty - item.HistoryQty}</td>
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2amount)}</td>
-                                        <td>{item.curdate}</td>
+                                        <td>{Moment(item.curdate).format("DD/MM/YYYY")}</td>
                                         <td><label className='btn btn-sm btn-danger'>ສີນຄ້າໝົດ</label></td>
                                     </tr>
                                 ))}
