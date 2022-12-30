@@ -48,6 +48,11 @@ export default function Login() {
         }
     }
 
+
+    const [showpass, setshowpass ] = useState('false') 
+    const showpassword = () => setshowpass('true')
+    const hidpassword = () => setshowpass('false')
+
   return (
     <>
         <div className='container p-2'>
@@ -63,17 +68,21 @@ export default function Login() {
                             <div className='form-group'>
                                 <div className='input-group mb-3'>
                                     <span className='input-group-text boder-100 wspan-100'>ຊື່ຜູ້ໃຊ້</span>
-                                    <input type='text' className='form-control boder-100' onChange={(e) => setUsername(e.target.value)} placeholder='ກະລຸນາປ້ອນ Username: .....'/>
+                                    <input type='text' className='form-control boder-100' onChange={(e) => setUsername(e.target.value)} placeholder='Username: .....' required/>
                                 </div>
                             </div>
-                            <div className='form-group'>
+                            <div className='form-group hidden-eye'>
                                 <div className='input-group mb-3'>
                                     <span className='input-group-text boder-100 wspan-100'>ລະຫັດຜ່ານ</span>
-                                    <input type='password' className='form-control boder-100' onChange={(e) => setPassword(e.target.value)} placeholder='ກະລຸນາປ້ອນ Password: .....'/>
+                                    <input type={showpass == 'true' ? 'text' : 'password'} className='form-control boder-100' onChange={(e) => setPassword(e.target.value)} placeholder='Password: .....' required/>
                                 </div>
+                            {showpass == 'true' ?
+                                <span className='eye' onClick={hidpassword}><i class="bi bi-eye-fill"></i></span>
+                                : <span className='eye' onClick={showpassword}><i class="bi bi-eye-slash-fill"></i></span> 
+                            }
                             </div>&nbsp;
                             <div className='form-group'>
-                                <button type='button' className='form-control boder-100 btn btn-success' onClick={SubLogin} placeholder='ກະລຸນາປ້ອນ Password: .....'>Longin</button>
+                                <button type='button' className='form-control boder-100 btn btn-success' onClick={SubLogin}>Longin</button>
                             </div>
                             <a href='https://wa.me/+8562095188702' target="_blank" className='btn btn-sm'><span className='span-cash'>devaloper: Apple.Phomsungcan</span></a>
                         </div>

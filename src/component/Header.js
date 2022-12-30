@@ -9,6 +9,7 @@ import DB from '../service/server'
 import Routers from '../Routers/Routers';
 import RouterLogin from "../Routers/RouterLogin";
 import LogoutGIF from '../assets/GIF/kaioura-anime-girl.gif'
+import IMGLOGO from '../assets/Img/LogoWebShoppy.png'
 
 export default function Headder (){
     const navigate = useNavigate()
@@ -52,9 +53,9 @@ export default function Headder (){
 
     return (
         <>
-        <div className={`${APITKOKEN == true ? '' : 'd-none'}`}>
+        <div className={`${APITKOKEN == true ? '' : 'd-none'}`} id='print-none'>
             <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixedS">
-                <Link class="navbar-brand" to="/ໂປຣເຈັກຂາຍເຄື່ອງ"><strong>ໂປຣເຈັກຂາຍເຄື່ອງ</strong></Link>
+                <Link class="navbar-brand" to="/ໂປຣເຈັກຂາຍເຄື່ອງ"><img src={IMGLOGO} width="150px"/></Link>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

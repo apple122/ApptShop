@@ -5,6 +5,7 @@ import Moment from 'moment';
 import { NumericFormat, NumberFormatBase } from 'react-number-format';
 import DB from '../service/server'
 import Swal from 'sweetalert2';
+import { Modal, Button, Form } from 'react-bootstrap'
 
 export default function HistoryTYPE() {
 
@@ -28,8 +29,19 @@ export default function HistoryTYPE() {
         setRedeuce()
     }
 
+    const [ IMGSHOW, swtSHOWIMG ] = useState('')
+    const ShowIMage = (IMG) => {
+        swtSHOWIMG(IMG)
+        setShow(true);
+    }
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (
         <>
+            <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter">
+                <img src={DB.IMG + IMGSHOW} style={{width: 100+'%'}}/>
+            </Modal>
             <div className='container'>
                 <div className='card'>
                     <div className='card-header d-flex'>
@@ -68,7 +80,7 @@ export default function HistoryTYPE() {
                                 {GETAPI.filter((e) => e.status == 'offline').map((item, index) => (
                                     <tr>
                                         <td>{index +1}</td>
-                                        <td><img src={DB.IMG + item.v2image} style={{width: 100}}/></td>
+                                        <td><img src={DB.IMG + item.v2image} onClick={() => ShowIMage(item.v2image)} style={{width: 100, height: 100}}/></td>
                                         <td>{(item.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
                                         <td>{item.sizev2}</td>
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2sprice)}</td>

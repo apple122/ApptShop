@@ -37,6 +37,18 @@
         justify-content: center;
         align-items: center;
     }
+    .box-one {
+        margin-top: 2%;
+    }
+    .box-two {
+        margin-top: 2%;
+    }
+    .box-three {
+        margin-top: 2%;
+    }
+    .box-flow {
+        margin-top: 2%;
+    }
 }
 
 @media (min-width: 768px){
@@ -69,4 +81,23 @@
     font-size: 12px;
     color: rgba(255, 255, 255, 0.911);
     margin-left: 4%;
+}
+
+.hidden-eye {
+    position: relative;
+}
+.eye {
+    /* display: none; */
+    position: absolute;
+    top: 8%;
+    right: 8%;
+    padding: 1%;
+    border-radius: 6px;
+    /* width: 55%; */
+    background-color: rgba(255, 255, 255, 0.884);
+    transition: all 0.5s;
+}
+.hidden-eye:hover .eye{
+    display: inline;
+    /* width: 10%; */
 }

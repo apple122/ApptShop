@@ -87,7 +87,8 @@ function SellTYPE() {
             v4qty: qty,
             v4bprice: (inputsel == '' ? bprice : inputsel),
             v4amount: (inputsel == '' ? bprice : inputsel) * qty,
-            curdate: Moment().format('YYYY/MM/DD')
+            curdate: Moment().format('YYYY/MM/DD h:mm:ss'),
+            UserUID: localStorage.getItem('OLDAPITOKEN')
         }).then((res) => {
             Swal.fire({
                 position: 'top-end',

@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import DB from '../service/server'
 import Moment from 'moment';
 import { Modal, Button, Form } from 'react-bootstrap'
+import Printer_HistorySell from './ModalEvent/Printer.HistorySell'
 
 
 function HistorySell() {
@@ -20,7 +21,7 @@ function HistorySell() {
     }, [reducer])
 
     const [ CurdateSelect, setCurdateSelect ] = useState('')
-    const LoopQnumberDrw = [...new Set(GETAPISEL.map(item => item.curdate))]
+    const LoopQnumberDrw = [...new Set(GETAPISEL.map(item => (Moment(item.curdate).format("YYYY/MM/DD"))))]
 
     const reload = () => {
         setRedeuce()
@@ -67,6 +68,10 @@ function HistorySell() {
         setShow(true);
     }
 
+    const OpenWindows = (ID) => {
+        window.open("ປະຫວັດການຂາຍ", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=-300,left=2300,width=900,height=800");
+    }
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -75,7 +80,7 @@ function HistorySell() {
         <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter">
             <img src={DB.IMG + IMGSHOW} style={{width: 100+'%'}}/>
         </Modal>
-        <div className='container'>
+        <div className='container' id='print-none'>
             <div className='card'>
                 <div className='card-header d-flex'>
                     <div className="d-flex">
@@ -120,8 +125,8 @@ function HistorySell() {
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4amount)}</td>
                                     <td>{item.curdate}</td>
                                     <td>
-                                        <button className='btn btn-sm btn-info'><i class="bi bi-printer-fill"></i> ອອກບີນ</button><br/>
-                                        {item.curdate == Moment().format("YYYY/MM/DD") ?
+                                        <Printer_HistorySell id={item._id}/>
+                                        {Moment(item.curdate).format("YYYY/MM/DD") == Moment().format("YYYY/MM/DD") ?
                                             <button type='button' className='btn btn-sm btn-danger mt-1' onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
                                         :''}
                                     </td>
@@ -137,8 +142,8 @@ function HistorySell() {
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4amount)}</td>
                                     <td>{item.curdate}</td>
                                     <td>
-                                        <button className='btn btn-sm btn-info'><i class="bi bi-printer-fill"></i> ອອກບີນ</button><br/>
-                                        {item.curdate == Moment().format("YYYY/MM/DD") ?
+                                        <Printer_HistorySell id={item._id}/>
+                                        {Moment(item.curdate).format("YYYY/MM/DD") == Moment().format("YYYY/MM/DD") ?
                                             <button type='button' className='btn btn-sm btn-danger mt-1' onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
                                         :''}
                                     </td>
