@@ -291,13 +291,17 @@ function ImportedTYPE() {
                         bprice: null,
                         status: 'offline'
                     }).then((res) => {
-                        Swal.fire(
-                            'ປີດການຂາຍສຳເລັດ!',
-                            `ປີດການຂາຍສຳເລັດ: ${Moment().format('YYYY/MM/DD H:mm:ss')}`,
-                            'success'
-                            )
-                        setRedeuce()
-                    console.log('PATCH: ປິດການຂາຍສຳເລັດ: ', Moment().format('YYYY/MM/DD H:mm:ss'))
+                        axios.patch(DB.URL + DB.PatchIMPDATE + UID, {
+                            curdate: Moment().format("YYYY/MM/DD")
+                        }).then(() => {
+                            Swal.fire(
+                                'ປີດການຂາຍສຳເລັດ!',
+                                `ປີດການຂາຍສຳເລັດ: ${Moment().format('YYYY/MM/DD H:mm:ss')}`,
+                                'success'
+                                )
+                            setRedeuce()
+                            console.log('PATCH: ປິດການຂາຍສຳເລັດ: ', Moment().format('YYYY/MM/DD H:mm:ss'))
+                        })
                     })
                 }
               })
@@ -337,7 +341,7 @@ function ImportedTYPE() {
                     <label>
                         <select className='form-control form-select' onChange={(e) => setAPI(e.target.value)}>
                             <option value=''>ເລືອກ ປະເພດ:</option>
-                            {GetAPI.filter((e) => e.status == 'true').map((item) => (
+                            {GetAPI.filter((e) => e.status !== 'Offline').map((item) => (
                                 <option value={item._id}>{item.v1type}</option>
                             ))}
                         </select>  
@@ -479,7 +483,7 @@ function ImportedTYPE() {
                                                     <div className='form-group'>
                                                         <label>ເລືອກ ປະເພດ:</label>
                                                         <select className='form-control form-select' onChange={(e) => setv2UIDType(e.target.value)} required>
-                                                            <option value={item.v1typeId}>{item.v1typeId.v1type}</option>
+                                                            <option value={item.v1typeId}>{item.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : item.v1typeId.v1type}</option>
                                                             {GetAPI.map((item) => (
                                                                 <option value={item._id}>{item.v1type}</option>
                                                             ))}
@@ -488,7 +492,7 @@ function ImportedTYPE() {
 
                                                     <div className='form-group'>
                                                         <label>ໝາຍເຫດ:</label>
-                                                        <div className='card form-control p-3'>{v2UIDremark == '' ? item.v1typeId.remark : v2UIDremark}</div>
+                                                        <div className='card form-control p-3'>{v2UIDremark == '' ? (item.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : item.v1typeId.remark) : v2UIDremark}</div>
                                                     </div>&nbsp;
                                                     
                                                 </div>
@@ -506,7 +510,7 @@ function ImportedTYPE() {
                                                 <div className='col-md-6 row'>
                                                     <div className='col-md-6'>
                                                         <div className='form-group'>
-                                                            <label>ປະເພດ: {v2UIDTypeS == '' ? item.v1typeId.v1type : v2UIDTypeS}</label>
+                                                            <label>ປະເພດ: {v2UIDTypeS == '' ? (item.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : item.v1typeId.v1type) : v2UIDTypeS}</label>
                                                             <div className='input-group'>
                                                                 <span className='input-group-text'><i class="bi bi-code-square"></i></span>
                                                                 <textarea type='search' className='form-control' onChange={(e) => Esetv2typeSl(e.target.value)} placeholder={`ປ່ອນຂໍ້ມູນປະເພດ: ${v2UIDTypeS == '' ? item.v1typeId.v1type : v2UIDTypeS}....`}>{item.v2typeSl}</textarea>
@@ -571,7 +575,7 @@ function ImportedTYPE() {
                                     <tr>
                                         <td>{x++}</td>
                                         <td><img src={DB.IMG + item.v2image} onClick={() => showImgae(item._id)} style={{width: 100, height: 100}}/></td>
-                                        <td>{(item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
+                                        <td>{(item.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
                                         <td>{item.sizev2}</td>
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2sprice)}</td>
                                         <td>{item.v2qty - item.HistoryQty}</td>
@@ -601,7 +605,7 @@ function ImportedTYPE() {
                                     <tr>
                                         <td>{x++}</td>
                                         <td><img src={DB.IMG + item.v2image} onClick={() => showImgae(item._id)} style={{width: 100, height: 100}}/></td>
-                                        <td>{(item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
+                                        <td>{(item.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
                                         <td>{item.sizev2}</td>
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2sprice)}</td>
                                         <td>{item.v2qty - item.HistoryQty}</td>

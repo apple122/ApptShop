@@ -15,6 +15,7 @@ export default {
     PutIMP : '/v2/imtype/put/',
     PatchIMP : '/v2/imtype/patch/',
     PatchIMPSTATUS : '/v2/imtype/patchstatus/',
+    PatchIMPDATE : '/v2/imtype/Curdate/',
     PatchHistory : '/v2/imtype/historyQty/',
     GetIMP : '/v2/imtype/get',
     GetIdIMP : '/v2/imtype/getById/',

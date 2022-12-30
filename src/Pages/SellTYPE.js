@@ -128,14 +128,14 @@ function SellTYPE() {
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={"#" + Loop.v1type} aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                    ປະເພດ: {Loop.v1type} / {GETSELAPI.filter((e) =>e.v1typeId._id == Loop._id && e.status == 'true').length}
+                                    ປະເພດ: {Loop.v1type} / {GETSELAPI.filter((e) => (e.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : e.v1typeId._id) == Loop._id && e.status == 'true').length}
                                 </button>
                             </h2>
                             <div id={Loop.v1type} class="accordion-collapse collapse show">
                                 <div class="accordion-body">
                                     <div className='row'>
-                                        {GETSELAPI.filter((e) =>e.v1typeId._id == Loop._id && e.status == 'true').length == 0  ? <label><img src={Beating_hearts} style={{width: 40}}/><strong>ປິດການຂາຍປະເພດນີ້....</strong></label> : ''}
-                                        {GETSELAPI.filter((e) => e.v1typeId._id == Loop._id && e.status == 'true').map((item) => (
+                                        {GETSELAPI.filter((e) => (e.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : e.v1typeId._id) == Loop._id && e.status == 'true').length == 0  ? <label><img src={Beating_hearts} style={{width: 40}}/><strong>ປິດການຂາຍປະເພດນີ້....</strong></label> : ''}
+                                        {GETSELAPI.filter((e) => (e.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : e.v1typeId._id) == Loop._id && e.status == 'true').map((item) => (
                                             item.v2qty - item.HistoryQty > 0 ? 
                                             <div className='col-md-2'>
                                                 <div className='pt-2'>
@@ -218,11 +218,11 @@ function SellTYPE() {
                                 <div className='card card-body'>
                                     {Percen == 'false' ? 
                                         <h4 className='row'>
-                                            <label className='col-md-3'>ລາຄາຂາຍ:</label><strong className='text-success col-md-4'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(bprice)}</strong>&nbsp; <label className='col-md-4  text-end'><button className='btn btn-sm btn-outline-success' onClick={TruePercen}>% ລົດລາຂາ</button></label>
+                                            <label className='col-md-3'>ລາຄາຂາຍ:</label><strong className='text-success col-md-5'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(bprice)}</strong>&nbsp; <label className='col-md-3  text-end'><button className='btn btn-sm btn-outline-success' onClick={TruePercen}>% ລົດລາຂາ</button></label>
                                         </h4>
                                         : 
                                         <h4 className='row'>
-                                            <label className='col-md-3'>ລາຄາຂາຍ:</label><label className='col-md-5'><NumericFormat className='form-control text-success' defaultValue={bprice} onChange={(e) => inputSell(e.target.value)}/></label>&nbsp; <label className='col-md-3'><button className='btn btn-sm btn-outline-danger' onClick={FalsePercen}>% ລົດລາຂາ</button></label>
+                                            <label className='col-md-3'>ລາຄາຂາຍ:</label><label className='col-md-5'><NumericFormat className='form-control text-success' defaultValue={bprice} onChange={(e) => inputSell(e.target.value)}/></label>&nbsp; <label className='col-md-3'><button className='btn btn-sm btn-outline-danger' onClick={FalsePercen}>% ປິດໂປຣ</button></label>
                                         </h4>
                                     }
                                     <h4>ເງີນລວມ: <strong className='text-danger'>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format((inputsel == '' ? bprice : inputsel) * qty)}</strong></h4>

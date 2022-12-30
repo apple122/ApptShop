@@ -30,7 +30,7 @@ export default function Report_allday() {
             </div>&nbsp;
             <div className="col-md-4">
                 <select className='form0=-select form-control text-center' onChange={(e) => setSelect(e.target.value)}>
-                  <option value={''}>~~ Seletc Month ~~</option>
+                  <option value={''}>~~ Select Month ~~</option>
                   {LoopQnumberDrw.map((item) => (
                     <option value={item}>ເດືອນ: {item}</option>
                   ))}

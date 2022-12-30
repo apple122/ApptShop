@@ -61,22 +61,22 @@ export default function Headder (){
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item item_hover">
-                            <Link to="/ໜ້າຫຼັກ" class="nav-link active" aria-current="page"><i class="bi bi-pie-chart-fill"></i> ໜ້າຫຼັກ</Link>
+                            <Link to="/ໜ້າຫຼັກ" class="nav-link active text-dark" aria-current="page"><i class="bi bi-pie-chart-fill"></i> ໜ້າຫຼັກ</Link>
                         </li>
                         <li class="nav-item item_hover">
-                            <Link to="./ປະເພດສີນຄ້າ" class="nav-link">ປະເພດສີນຄ້າ</Link>
+                            <Link to="./ປະເພດສີນຄ້າ" class="nav-link text-dark">ປະເພດສີນຄ້າ</Link>
                         </li>
                         <li class="nav-item item_hover">
                             <Link to="./ນຳເຂົ້າສິນຄ້າ" class="nav-link text-danger">ນຳເຂົ້າສິນຄ້າ</Link>
                         </li>
                         <li class="nav-item item_hover">
-                            <Link to="./ຂາຍສີນຄ້າ" class="nav-link"><i class="bi bi-shop"></i> ຂາຍສີນຄ້າ</Link>
+                            <Link to="./ຂາຍສີນຄ້າ" class="nav-link text-dark"><i class="bi bi-shop"></i> ຂາຍສີນຄ້າ</Link>
                         </li>
                         <li class="nav-item item_hover">
-                            <Link to="./ປະຫວັດການຂາຍ" class="nav-link"><i class="bi bi-clock-history"></i> ປະຫວັດການຂາຍ</Link>
+                            <Link to="./ປະຫວັດການຂາຍ" class="nav-link text-dark"><i class="bi bi-clock-history"></i> ປະຫວັດການຂາຍ</Link>
                         </li>
                         <li class="nav-item item_hover">
-                            <Link to="./ເກັບປະຫວັດສີນຄ້າໝົດ" class="nav-link"><i class="bi bi-clock-history"></i> ເກັບປະຫວັດສີນຄ້າໝົດ</Link>
+                            <Link to="./ເກັບປະຫວັດສີນຄ້າໝົດ" class="nav-link text-dark"><i class="bi bi-clock-history"></i> ເກັບປະຫວັດສີນຄ້າໝົດ</Link>
                         </li>
 
                     </ul>

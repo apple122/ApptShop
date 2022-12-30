@@ -20,14 +20,16 @@
 
 .item_hover {
     transition: all 0.1s;
-    color: black;
+    z-index: 5;
  }
  .item_hover:hover {
     padding-left: 10px;
     padding-right: 10px;
     font-size: 16px;
     transition: all 0.1s;
-    background-color: antiquewhite;
+    /* background-image: linear-gradient(36deg, red, orange,yellow, green, indigo, blue, purple); */
+    background-image: linear-gradient(36deg, rgba(139, 40, 196, 0.623), rgba(255, 255, 255, 0.527), rgba(255, 255, 255, 0.404), rgb(13, 150, 248));
+    background-size: 100% 100%;
     border-radius: 4px;
  }
  .pr-2{

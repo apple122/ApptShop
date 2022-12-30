@@ -9,12 +9,20 @@ import Swal from 'sweetalert2';
 export default function HistoryTYPE() {
 
     const [ GETAPI, setAPI ] = useState([])
+    const [ GESLTAPI, setSLAPI ] = useState([])
+    const [ GetAPI, setGETAPI ] = useState([])
     const [ reducer, setRedeuce ] = useReducer(x => x + 1, 0)
     useEffect(() => {
         axios.get(DB.URL + DB.GetIMP).then((res) => {
             setAPI(res.data.reverse())
         })
+        
+        axios.get(DB.URL + DB.getTypePro).then((res) => {
+            setGETAPI(res.data.reverse())
+          })
     }, [reducer])
+
+    const LoopQnumberDrw = [...new Set(GETAPI.filter((e) => e.status == 'offline').map(item => item.v1typeId._id))]
 
     const reload = () => {
         setRedeuce()
@@ -29,8 +37,17 @@ export default function HistoryTYPE() {
                             <label><h4>ປະຫວັດສີນຄ້າໝົດ HistoryTYPE</h4></label>&nbsp;
                             <label className="btn btn-sm btn-warning" onClick={reload}><i class="bi bi-arrow-clockwise"></i> ResetData</label>&nbsp;
                         </div>&nbsp;
+                        <label>
+                            <select className='form-control form-select' onChange={(e) => setSLAPI(e.target.value)}>
+                                <option value=''>ເລືອກ ປະເພດ:</option>
+                                {GetAPI.map((item) => (
+                                    item._id == LoopQnumberDrw ? 
+                                    <option value={item._id}>{item.v1type}</option>
+                                    : ''
+                                ))}
+                            </select>  
+                        </label>
                     </div>
-    
                     <div className='card-body w-100 overflow-auto'>
                     {GETAPI.filter((e) => e.status == 'offline').length > 0 ? 
                         <table class="table table-striped">
@@ -43,6 +60,7 @@ export default function HistoryTYPE() {
                                     <th>ລາຄາຊື້ ຕໍ່ໂຕ</th>
                                     <th>ຈຳນວນ</th>
                                     <th>ເງີນລວມ</th>
+                                    <th>ວັນທີ່ເກັບປະຫວັດ</th>
                                     <th><strong className='text-danger'>( Status )</strong></th>
                                 </tr>
                             </thead>
@@ -51,11 +69,12 @@ export default function HistoryTYPE() {
                                     <tr>
                                         <td>{index +1}</td>
                                         <td><img src={DB.IMG + item.v2image} style={{width: 100}}/></td>
-                                        <td>{(item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
+                                        <td>{(item.v1typeId == null ? 'ຂໍ້ມູນຫາຍ' : item.v1typeId.v1type)+ ': '+(item.v2typeSl)}</td>
                                         <td>{item.sizev2}</td>
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2sprice)}</td>
                                         <td>{item.v2qty - item.HistoryQty}</td>
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2amount)}</td>
+                                        <td>{item.curdate}</td>
                                         <td><label className='btn btn-sm btn-danger'>ສີນຄ້າໝົດ</label></td>
                                     </tr>
                                 ))}

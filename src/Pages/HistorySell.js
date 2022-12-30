@@ -113,7 +113,7 @@ function HistorySell() {
                                 <tr>
                                     <td>{x++}</td>
                                     <td>{item.number_bin}</td>
-                                    <td><img src={DB.IMG + item?.v2ImId.v2image} onClick={() => ShowIMage(item.v2ImId.v2image)} style={{width: 100, height: 100}}/></td>
+                                    <td><img src={DB.IMG + (item.v2ImId == null ? 'ຂໍ້ມູນຫາຍ' : item.v2ImId.v2image)} onClick={() => ShowIMage(item.v2ImId == null ? 'ຂໍ້ມູນຫາຍ' : item.v2ImId.v2image)} style={{width: 100, height: 100}}/></td>
                                     <td>{item?.v2ImId.v2typeSl}</td>
                                     <td>{item.v4qty}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4bprice)}</td>
@@ -130,8 +130,8 @@ function HistorySell() {
                                 <tr>
                                     <td>{x++}</td>
                                     <td>{item.number_bin}</td>
-                                    <td><img src={DB.IMG + item?.v2ImId.v2image} onClick={() => ShowIMage(item.v2ImId.v2image)} style={{width: 100, height: 100}}/></td>
-                                    <td>{item?.v2ImId.v2typeSl}</td>
+                                    <td><img src={DB.IMG + (item.v2ImId == null ? 'ຂໍ້ມູນຫາຍ' : item.v2ImId.v2image)} onClick={() => ShowIMage(item.v2ImId.v2image)} style={{width: 100, height: 100}}/></td>
+                                    <td>{item?.v2ImId.v2typeSl}</td> 
                                     <td>{item.v4qty}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4bprice)}</td>
                                     <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v4amount)}</td>

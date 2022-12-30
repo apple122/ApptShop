@@ -69,7 +69,6 @@ export default function TypePro (props) {
     // GET API
     const [ GetAPI, setGETAPI ] = useState([])
     const [ GetFalse, setFalse ] = useState([])
-    console.log(GetFalse)
     useEffect(() => {
       axios.get(DB.URL + DB.getTypePro).then((res) => {
         setGETAPI(res.data.reverse())
