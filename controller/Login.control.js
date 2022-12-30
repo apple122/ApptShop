@@ -14,6 +14,9 @@ const ImControl = {
 
             const newLogin = await data.Login.create({
                 UserName: req.body.UserName,
+                fullname: req.body.fullname,
+                phone: req.body.phone,
+                email: req.body.email,
                 Password: bcrypt.hashSync(req.body.Password, 8)
             })
 
@@ -28,6 +31,28 @@ const ImControl = {
             res.status(200).json(newLogin)
         } catch (error) {
             res.status(500).json(error)
+        }
+    },
+
+    // PATCH DATE
+    PatchUser: async ( req, res ) => {
+        try {
+            const dataIm = {
+                UserName: req.body.UserName,
+                fullname: req.body.fullname,
+                phone: req.body.phone,
+                email: req.body.email,
+                Password: bcrypt.hashSync(req.body.Password, 8)
+            }
+            const patchusers = await data.Login.findByIdAndUpdate(req.params.id, dataIm, {
+                new: true,
+                runValidators: true,
+                useFindAndModify: false
+            })
+            console.log(patchusers)
+            res.status(200).json(patchusers)
+        } catch (error) {
+            console.log(error)
         }
     },
 

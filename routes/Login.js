@@ -31,6 +31,12 @@ router.get('/', function(req, res, next) {
      *                type: string
      *              Password:
      *                type: string
+     *              fullname:
+     *                type: string
+     *              phone:
+     *                type: string
+     *              email:
+     *                type: string
      *   responses:
      *    200:
      *       description: OK
@@ -79,6 +85,50 @@ router.post('/Login', Login.addPOSTLogin),
 router.post('/welcom', auth, (req, res) => {
     res.status(200).send('Welcom OK')
 })
+
+//PATCH LOGIN
+    /**
+     * @swagger
+     * /Login/patch/{id}:
+     *  patch:
+     *   summary: PATCH Login
+     *   tags: [Login]
+     *   parameters:
+     *    - in: path
+     *      name: id
+     *      schema:
+     *       type: string
+     *      required: true
+     *      description: User_ID
+     *   requestBody:
+     *      content:
+     *        multipart/form-data:
+     *          schema:
+     *            type: object
+     *            properties:
+     *              UserName:
+     *                type: string
+     *              Password:
+     *                type: string
+     *              fullname:
+     *                type: string
+     *              phone:
+     *                type: string
+     *              email:
+     *                type: string
+     *   responses:
+     *    200:
+     *       description: OK
+     *    403:
+     *       description: Forbiden
+     *    401:
+     *       description: Unauthorization
+     *    404:
+     *       description: Not found
+     *    500:
+     *       description: Some server error
+     */
+    router.patch('/patch/:id', Login.PatchUser), 
 
 //GET
 /**

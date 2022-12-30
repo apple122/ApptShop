@@ -38,6 +38,8 @@ router.get('/', function(req, res, next) {
      *                type: string
      *              curdate:
      *                type: string
+     *              UserUID:
+     *                type: string
      *   responses:
      *    200:
      *       description: OK

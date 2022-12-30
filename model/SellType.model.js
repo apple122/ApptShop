@@ -31,6 +31,10 @@ const Schema = new mongoose.Schema({
         type: String,
         default: false
     },
+    UserUID: {
+        type: String,
+        required: true
+    }
 })
 
 let SellType = mongoose.model("SellType", Schema)
