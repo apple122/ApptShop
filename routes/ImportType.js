@@ -339,5 +339,7 @@ router.delete('/imtype/delete/:id', ImControl.DelImType)
      *       description: Some server error
      */
     router.get('/imtype/Offline/:id', ImControl.getByIdNameImType)
+    router.patch('/imtype/curdate/:id', ImControl.PatchImTypeDATE)
+
 
 module.exports = router;

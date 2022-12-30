@@ -184,9 +184,6 @@ const ImControl = {
     PatchImTypeSTATUS: async ( req, res ) => {
         
         try {
-            const file = req.files.v2image
-            file.mv('./upload/IMG/' + file.name, async function(err, result) {})
-        } catch (error) {
             const dataIm = {
                 bprice: req.body.bprice,
                 status: req.body.status
@@ -198,6 +195,26 @@ const ImControl = {
             })
             console.log(PutType)
             res.status(200).json(PutType)
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    // PATCH DATE
+    PatchImTypeDATE: async ( req, res ) => {
+        try {
+            const dataIm = {
+                curdate: req.body.curdate
+            }
+            const PutType = await data.Imtype.findByIdAndUpdate(req.params.id, dataIm, {
+                new: true,
+                runValidators: true,
+                useFindAndModify: false
+            })
+            console.log(PutType)
+            res.status(200).json(PutType)
+        } catch (error) {
+            console.log(error)
         }
     },
 
