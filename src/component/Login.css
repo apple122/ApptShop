@@ -49,6 +49,9 @@
     .box-flow {
         margin-top: 2%;
     }
+    .box-zero {
+        margin-top: 2%;
+    }
 }
 
 @media (min-width: 768px){
@@ -75,6 +78,7 @@
     .wspan-100{
         width: 90px;
     }
+    
 }
 
 .span-cash{

@@ -37,6 +37,11 @@
  }
 
 /* BOX */
+.box-zero {
+    background-image: linear-gradient(36deg, rgba(102, 72, 119, 0.418), rgb(19, 104, 165));
+    background-size: 100% 100%;
+    border-radius: 6px;
+}
 .box-one {
     background-image: linear-gradient(36deg, rgba(207, 144, 243, 0.418), rgb(13, 150, 248));
     background-size: 100% 100%;
