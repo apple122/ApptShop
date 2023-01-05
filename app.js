@@ -92,8 +92,8 @@ const swaggerOptions = {
     swagger: "3.0",
     servers: [
       { url: `http://localhost:3022` },
-      { url: `http://192.168.100.148/:3022` },
-      { url: `http://192.168.100.84/:3022` },
+      { url: `http://192.168.100.148:3022` },
+      { url: `http://192.168.100.84:3022` },
       { url: `http://172.20.10.4:3022` },
     ],
   },
