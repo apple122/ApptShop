@@ -155,12 +155,12 @@ export default function TypePro (props) {
         <>
         <div className='container'>
             <div className='card'>
-            <div className='card-header d-flex'>
-                <div className="d-flex col-md-4">
+            <div className='card-header d-respone'>
+                <div className="d-flex col-md-6">
                     <label><h4>ຈັດການປະເພດສີນຄ້າ</h4></label>&nbsp;
-                    <label className="btn btn-sm btn-warning" onClick={Reload}><i class="bi bi-arrow-clockwise"></i> ResetData</label>
                 </div>&nbsp;
-                <div className="d-flex justify-content-end col-md-8">
+                <div className="d-flex justify-respone col-md-6">
+                    <label className="btn btn-sm btn-warning" onClick={Reload}><i class="bi bi-arrow-clockwise"></i> ResetData</label>&nbsp;
                     <label className={`btn btn-sm btn-primary ${show == false ? "" : "d-none"}`} onClick={handleShow} data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-cloud-download"></i> ເພີມຂໍ້ມູນ</label> 
                     <label className={`btn btn-sm btn-danger ${show == true ? "" : "d-none"}`} onClick={handleClose} data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-x-diamond"></i> Closs</label>
                 </div>
@@ -190,7 +190,7 @@ export default function TypePro (props) {
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th className="col-md-1"><strong className="text-danger">( {GetAPI.length} )</strong></th>
+                                    <th className="col-1"><strong className="text-danger">#{GetAPI.length}</strong></th>
                                     <th className="col-4">ປະເພດ</th>
                                     <th className="col-4">ໝາຍເຫດ</th>
                                     <th scope="col-2">ຈັດການ</th>
@@ -222,10 +222,12 @@ export default function TypePro (props) {
                                         <td>{item.v1type}</td>
                                         <td>{item.remark}</td>
                                         <td>
-                                            <a className="btn-sm btn-primary" onClick={() => onlineUpdate(item._id)}><i class="bi bi-pencil-square"></i></a>&nbsp;
-                                            {GetFalse.filter((e) => e.status == 'offline' && e.v1typeId == item._id).length == GetFalse.filter((e) => e.v1typeId == item._id).length ?
-                                             <a className="btn-sm btn-danger" onClick={() => Offline(item._id)}><i class="bi bi-inboxes-fill"></i></a> : <label className="btn-sm btn-success"><i class="bi bi-chevron-bar-contract"></i> ຂໍ້ມູນມີການນຳໃຊ້</label>
-                                            }
+                                            <div className="btn-group">
+                                                <a className="btn-sm btn-primary" onClick={() => onlineUpdate(item._id)}><i class="bi bi-pencil-square"></i></a>&nbsp;
+                                                {GetFalse.filter((e) => e.status == 'offline' && e.v1typeId == item._id).length == GetFalse.filter((e) => e.v1typeId == item._id).length ?
+                                                <a className="btn-sm btn-danger" onClick={() => Offline(item._id)}><i class="bi bi-inboxes-fill"></i></a> : <label className="btn-sm btn-success" style={{width: 115}}><i class="bi bi-chevron-bar-contract"></i> ຂໍ້ມູນມີການນຳໃຊ້</label>
+                                                }
+                                            </div>
                                         </td>
                                         <td className="text-center">
                                             {GetFalse.filter((e) => e.status == 'offline' && e.v1typeId == item._id).length == GetFalse.filter((e) => e.v1typeId == item._id).length ?

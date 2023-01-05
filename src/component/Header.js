@@ -10,6 +10,7 @@ import Routers from '../Routers/Routers';
 import RouterLogin from "../Routers/RouterLogin";
 import LogoutGIF from '../assets/GIF/kaioura-anime-girl.gif'
 import IMGLOGO from '../assets/Img/LogoWebShoppy.png'
+import './Setting.css'
 
 export default function Headder (){
     const navigate = useNavigate()
@@ -51,33 +52,45 @@ export default function Headder (){
     }
     })
 
+    const [ hidareshow, sethidshow ] = useState(false)
+    const handleshow = () => sethidshow(true)
+    const handlehid = () => sethidshow(false) 
+
     return (
         <>
         <div className={`${APITKOKEN == true ? '' : 'd-none'}`} id='print-none'>
             <nav class="navbar navbar-expand-lg navbar-light bg-light position-fixedS">
-                <Link class="navbar-brand" to="/ໂປຣເຈັກຂາຍເຄື່ອງ"><img src={IMGLOGO} width="150px"/></Link>
+                <Link class={`navbar-brand ${hidareshow == true ? 'd-none' : ''}`} id="hover-imglogo" onClick={handleshow}><img src={IMGLOGO} width="150"/></Link>
+                <Link class={`navbar-brand ${hidareshow == false ? 'd-none' : ''}`} id="hover-imglogo" onClick={handlehid}><img src={IMGLOGO} width="150"/></Link>
+                <div className={`card-body bg-white setting-web ${hidareshow == true ? '' : 'd-none'}`}>
+                    <ul>
+                        <li class="nav-item item_hover">
+                            <Link to="/CreateUsers" class="nav-link active text-danger" aria-current="page"><i class="bi bi-person-fill-gear"></i> Create Users</Link>
+                        </li>
+                    </ul>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item item_hover">
-                            <Link to="/ໜ້າຫຼັກ" class="nav-link active text-dark" aria-current="page"><i class="bi bi-pie-chart-fill"></i> ໜ້າຫຼັກ</Link>
+                            <Link to="/ໜ້າຫຼັກ" class="nav-link active text-dark" onClick={handlehid} aria-current="page"><i class="bi bi-pie-chart-fill"></i> ໜ້າຫຼັກ</Link>
                         </li>
                         <li class="nav-item item_hover">
-                            <Link to="./ປະເພດສີນຄ້າ" class="nav-link text-dark">ປະເພດສີນຄ້າ</Link>
+                            <Link to="./ປະເພດສີນຄ້າ" class="nav-link text-dark" onClick={handlehid}>ປະເພດສີນຄ້າ</Link>
                         </li>
                         <li class="nav-item item_hover">
-                            <Link to="./ນຳເຂົ້າສິນຄ້າ" class="nav-link text-danger">ນຳເຂົ້າສິນຄ້າ</Link>
+                            <Link to="./ນຳເຂົ້າສິນຄ້າ" class="nav-link text-danger" onClick={handlehid}>ນຳເຂົ້າສິນຄ້າ</Link>
                         </li>
                         <li class="nav-item item_hover">
-                            <Link to="./ຂາຍສີນຄ້າ" class="nav-link text-dark"><i class="bi bi-shop"></i> ຂາຍສີນຄ້າ</Link>
+                            <Link to="./ຂາຍສີນຄ້າ" class="nav-link text-dark" onClick={handlehid}><i class="bi bi-shop"></i> ຂາຍສີນຄ້າ</Link>
                         </li>
                         <li class="nav-item item_hover">
-                            <Link to="./ປະຫວັດການຂາຍ" class="nav-link text-dark"><i class="bi bi-clock-history"></i> ປະຫວັດການຂາຍ</Link>
+                            <Link to="./ປະຫວັດການຂາຍ" class="nav-link text-dark" onClick={handlehid}><i class="bi bi-clock-history"></i> ປະຫວັດການຂາຍ</Link>
                         </li>
                         <li class="nav-item item_hover">
-                            <Link to="./ເກັບປະຫວັດສີນຄ້າໝົດ" class="nav-link text-dark"><i class="bi bi-clock-history"></i> ເກັບປະຫວັດສີນຄ້າໝົດ</Link>
+                            <Link to="./ເກັບປະຫວັດສີນຄ້າໝົດ" class="nav-link text-dark" onClick={handlehid}><i class="bi bi-clock-history"></i> ເກັບປະຫວັດສີນຄ້າໝົດ</Link>
                         </li>
 
                     </ul>

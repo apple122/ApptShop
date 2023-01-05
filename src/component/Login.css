@@ -52,6 +52,12 @@
     .box-zero {
         margin-top: 2%;
     }
+    .d-respone {
+        display: block;
+    }
+    .justify-respone{
+        justify-content: center;
+    }
 }
 
 @media (min-width: 768px){
@@ -78,7 +84,12 @@
     .wspan-100{
         width: 90px;
     }
-    
+    .d-respone {
+        display: flex;
+    }
+    .justify-respone {
+        justify-content: end;
+    }
 }
 
 .span-cash{

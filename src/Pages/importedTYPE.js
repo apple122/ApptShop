@@ -53,8 +53,10 @@ function ImportedTYPE() {
         setFile((e.target.files[0]));
         setFileShow(URL.createObjectURL(e.target.files[0]));
     }
+    const [ spineSave, setSpinner ] = useState(false)
     const Save = (e) => {
         e.preventDefault()
+        setSpinner(true)
         try {
             const formData = new FormData()
             formData.append('v1typeId', UIDSL)
@@ -76,6 +78,7 @@ function ImportedTYPE() {
                     width: 400,
                   })
                 setRedeuce()
+                setSpinner(false)
                 console.log('POST: Success ', Moment().format('YYYY/MM/DD H:mm:ss'))
                 
               }).then((res) => {
@@ -171,6 +174,7 @@ function ImportedTYPE() {
     const [ Success, setSuccess ] = useState('')
     const updateSave = (e) => {
         e.preventDefault()
+        setSpinner(true)
         try {
             const formData = new FormData()
             formData.append('v1typeId', v2UIDType == '' ? v1typeId : v2UIDType)
@@ -193,6 +197,7 @@ function ImportedTYPE() {
                   })
                 setRedeuce()
                 setSuccess('Success')
+                setSpinner(false)
                 console.log('PATCH: Success ', Moment().format('YYYY/MM/DD H:mm:ss'))
 
               })
@@ -334,10 +339,12 @@ function ImportedTYPE() {
     </Modal>
        <div className='container'>
             <div className='card'>
-            <div className='card-header d-flex'>
+            <div className='card-header d-respone'>
                 <div className="d-flex col-md-6">
                     <label><h4>ຈັດການ ການນຳເຂົ້າສິນຄ້າ</h4></label>&nbsp;
-                    <label className="btn btn-sm btn-warning" onClick={Reload}><i class="bi bi-arrow-clockwise"></i> ResetData</label>&nbsp;
+                </div>&nbsp;
+                <div className="d-flex justify-content-end col-md-6">
+                    <label className="btn btn-sm btn-warning" style={{width: 130}} onClick={Reload}><i class="bi bi-arrow-clockwise"></i> ResetData</label>&nbsp;
                     <label>
                         <select className='form-control form-select' onChange={(e) => setAPI(e.target.value)}>
                             <option value=''>ເລືອກ ປະເພດ:</option>
@@ -345,11 +352,9 @@ function ImportedTYPE() {
                                 <option value={item._id}>{item.v1type}</option>
                             ))}
                         </select>  
-                    </label>
-                </div>&nbsp;
-                <div className="d-flex justify-content-end col-md-6">
-                    <label className={`btn btn-sm btn-primary ${show == false ? "" : "d-none"}`} onClick={handleShow} data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-cloud-download"></i> ເພີມຂໍ້ມູນ</label> 
-                    <label className={`btn btn-sm btn-danger ${show == true ? "" : "d-none"}`} onClick={handleClose} data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-x-diamond"></i> Closs</label>
+                    </label>&nbsp;
+                    <label className={`btn btn-sm btn-primary ${show == false ? "" : "d-none"}`} style={{width: 130}} onClick={handleShow} data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-cloud-download"></i> ເພີມຂໍ້ມູນ</label> 
+                    <label className={`btn btn-sm btn-danger ${show == true ? "" : "d-none"}`} style={{width: 130}} onClick={handleClose} data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-x-diamond"></i> Closs</label>
                 </div>
             </div>
             <div className='card card-body'>
@@ -371,12 +376,18 @@ function ImportedTYPE() {
                                     <label>ໝາຍເຫດ:</label>
                                     <div className='card form-control p-3'>{v1remark}</div>
                                 </div>&nbsp;
-                                <div className='footer-group'>
-                                    <button type='submit' className='btn btn-sm btn-info'>Save</button>&nbsp;
+                                <div className='footer-group renative'>
+                                    <button type='submit' className='btn btn-sm btn-info'><i class="bi bi-cloud-download"></i> ບັນທືກຂໍ້ມູນ</button>&nbsp;
                                     <button type='reset' className='btn btn-sm btn-danger'>Reset</button>
+                                    {spineSave == false ? '' :
+                                        <div class="d-flex justify-content-center spinner-absolute">
+                                            <div class="spinner-border" role="status">
+                                                <span class="sr-only"></span>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
-                            </div>
-                            
+                            </div>&nbsp;
                             <div className='col-md-3'>
                                 <div className='form-group'>
                                     <label>Image:</label>
@@ -440,7 +451,7 @@ function ImportedTYPE() {
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th className="col-md-1"><strong className="text-danger">( {GetAPI.length} )</strong></th>
+                                <th className="col-md-1"><strong className="text-danger">#{GetAPI.length}</strong></th>
                                 <th className='col-md-2'>ຮູບພາບ</th>
                                 <th>ຂໍ້ມູນປະເພດ</th>
                                 <th>ຂະໜາດ</th>
@@ -557,17 +568,24 @@ function ImportedTYPE() {
                                             </div>
                                         </td>
                                         <td colSpan='2'>
-                                            <div className='footer-group pt-5'>
+                                            <div className='footer-group pt-5 renative'>
                                                 {Success == 'Success' ? 
                                                     <button type='submit' className="btn btn-sm btn-success"><i class="bi bi-check2-circle"></i> Success</button> : 
                                                     <button type='submit' className='btn btn-sm btn-info'>Save</button>
                                                 }&nbsp;
                                                 
                                                 <button type='reset' className='btn btn-sm btn-danger'>Reset</button>
+
+                                                {spineSave == true ? <div class="d-flex justify-content-center spinner-absolute2">
+                                                    <div class="spinner-border" role="status">
+                                                        <span class="sr-only"></span>
+                                                    </div>
+                                                </div> : ''}
                                             </div>
                                             <div className='footer-group pt-2'>
                                                 <button type='button' onClick={Cancel} className='btn btn-sm btn-warning'>Cancel</button>&nbsp;
                                             </div>
+                                            
                                         </td>
                                     </tr>
                                 : 
@@ -612,7 +630,7 @@ function ImportedTYPE() {
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.v2amount)}</td>
                                         <td>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'LAK' }).format(item.bprice)}</td>
                                         <td>
-                                            <div>
+                                            <div className='btn-group'>
                                                 <a className="btn-sm btn-primary" onClick={() => Update(item._id)}><i class="bi bi-pencil-square"></i></a>&nbsp;
                                                 {item.statusSell == 'true' ? 
                                                     <button type='button' className="btn btn-sm btn-danger" onClick={() => OffLineSell(item._id)}><i class="bi bi-inboxes-fill"></i></button>
@@ -622,8 +640,8 @@ function ImportedTYPE() {
                                             </div>
                                             <div className='pt-3'>
                                                 {item.status == 'false' ? 
-                                                <button type='button' className="btn btn-sm btn-warning" onClick={() => OnlineSell(item._id)}>ເປິດການຂາຍ</button> : 
-                                                <button type='button' className="btn btn-sm btn-success" onClick={() => OffSell(item._id)}>ປິດການຂາຍ</button>}&nbsp;
+                                                <button type='button' className="btn btn-sm btn-warning" style={{width: 100}} onClick={() => OnlineSell(item._id)}>ເປິດການຂາຍ</button> : 
+                                                <button type='button' className="btn btn-sm btn-success" style={{width: 100}} onClick={() => OffSell(item._id)}>ປິດການຂາຍ</button>}&nbsp;
                                             </div>
                                         </td>
                                         <td className="text-center">

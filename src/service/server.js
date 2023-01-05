@@ -1,6 +1,9 @@
 export default {
-    URL : 'http://localhost:3022',
-    IMG : 'http://localhost:3022/profile/',
+    // URL : 'http://localhost:3022',
+    // IMG : 'http://localhost:3022/profile/',
+
+    URL : 'http://192.168.100.148:3022',
+    IMG : 'http://192.168.100.148:3022/profile/',
 
     // API TypePro
     PostTypePro : '/v1/type/add',

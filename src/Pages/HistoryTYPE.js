@@ -44,12 +44,12 @@ export default function HistoryTYPE() {
             </Modal>
             <div className='container'>
                 <div className='card'>
-                    <div className='card-header d-flex'>
+                    <div className='card-header d-respone'>
                         <div className="d-flex">
                             <label><h4>ປະຫວັດສີນຄ້າໝົດ HistoryTYPE</h4></label>&nbsp;
-                            <label className="btn btn-sm btn-warning" onClick={reload}><i class="bi bi-arrow-clockwise"></i> ResetData</label>&nbsp;
                         </div>&nbsp;
-                        <label>
+                        <label className='d-flex'>
+                            <label className="btn btn-sm btn-warning" style={{width: 180}} onClick={reload}><i class="bi bi-arrow-clockwise"></i> ResetData</label>&nbsp;
                             <select className='form-control form-select' onChange={(e) => setSLAPI(e.target.value)}>
                                 <option value=''>ເລືອກ ປະເພດ:</option>
                                 {GetAPI.map((item) => (
@@ -65,7 +65,7 @@ export default function HistoryTYPE() {
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th className="col-md-1"><strong className="text-danger">( {GETAPI.filter((e) => e.status == 'offline').length} )</strong></th>
+                                    <th className="col-md-1"><strong className="text-danger">#{GETAPI.filter((e) => e.status == 'offline').length}</strong></th>
                                     <th className='col-md-2'>ຮູບພາບ</th>
                                     <th>ຂໍ້ມູນປະເພດ</th>
                                     <th>ຂະໜາດ</th>
@@ -73,7 +73,7 @@ export default function HistoryTYPE() {
                                     <th>ຈຳນວນ</th>
                                     <th>ເງີນລວມ</th>
                                     <th>ວັນທີ່ເກັບປະຫວັດ</th>
-                                    <th><strong className='text-danger'>( Status )</strong></th>
+                                    <th><strong className='text-danger'>Status</strong></th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -82,13 +82,13 @@ function HistorySell() {
         </Modal>
         <div className='container' id='print-none'>
             <div className='card'>
-                <div className='card-header d-flex'>
-                    <div className="d-flex">
+                <div className='card-header d-respone'>
+                    <div className="">
                         <label><h4>ປະຫວັດການຂາຍ HistorySell</h4></label>&nbsp;
-                        <label className="btn btn-sm btn-warning" onClick={reload}><i class="bi bi-arrow-clockwise"></i> ResetData</label>&nbsp;
                     </div>&nbsp;
-                    <div className="col-md-4">
-                        <select className='form-control form-select text-center' onChange={(e) => setCurdateSelect(e.target.value)}>
+                    <div className="col-md-4 d-flex">
+                        <label className="btn btn-sm btn-warning" style={{width: 180}} onClick={reload}><i class="bi bi-arrow-clockwise"></i> ResetData</label>&nbsp;
+                        <select className='form-control form-select text-center ' onChange={(e) => setCurdateSelect(e.target.value)}>
                             <option value=''>~~Select Curdate~~</option>
                             {LoopQnumberDrw.map((item) => (
                                 <option value={item}>ຂາຍວັນທີ່: {item}</option>
@@ -102,7 +102,7 @@ function HistorySell() {
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th className="col-md-1"><strong className="text-danger">( {GETAPISEL.filter(e => e.curdate !== CurdateSelect).length} )</strong></th>
+                                <th className="col-md-1"><strong className="text-danger">#{GETAPISEL.filter(e => e.curdate !== CurdateSelect).length}</strong></th>
                                 <th>ເລກບີນ</th>
                                 <th>ຮູບພາບ</th>
                                 <th>ລາຍລະອຽດ</th>
@@ -127,7 +127,7 @@ function HistorySell() {
                                     <td>
                                         <Printer_HistorySell id={item._id}/>
                                         {Moment(item.curdate).format("YYYY/MM/DD") == Moment().format("YYYY/MM/DD") ?
-                                            <button type='button' className='btn btn-sm btn-danger mt-1' onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
+                                            <button type='button' className='btn btn-sm btn-danger mt-1' style={{width: 120}} onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
                                         :''}
                                     </td>
                                 </tr>
@@ -144,7 +144,7 @@ function HistorySell() {
                                     <td>
                                         <Printer_HistorySell id={item._id}/>
                                         {Moment(item.curdate).format("YYYY/MM/DD") == Moment().format("YYYY/MM/DD") ?
-                                            <button type='button' className='btn btn-sm btn-danger mt-1' onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
+                                            <button type='button' className='btn btn-sm btn-danger mt-1' style={{width: 150}} onClick={() => RemoveSell(item._id)}><i class="bi bi-x-diamond-fill"></i> ຍົກເລີກການຂາຍ</button>
                                         :''}
                                     </td>
                                 </tr>

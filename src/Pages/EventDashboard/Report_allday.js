@@ -24,7 +24,7 @@ export default function Report_allday() {
 
   return (
     <div className='card'>
-        <div className='card-header d-flex'>
+        <div className='card-header d-respone'>
             <div className="d-flex">
                 <label><h4>ສະຫຼຸບເງີນລາຍເດືອນ</h4></label>&nbsp;
             </div>&nbsp;
